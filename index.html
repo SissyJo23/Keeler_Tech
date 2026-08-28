@@ -411,7 +411,8 @@
             feed.prepend(loadingCard);
 
             try {
-                const response = await fetch('http://3.145.129.227:3005/api/v1/verify-document', {
+                // Relative URL path for portable server/proxy execution
+                const response = await fetch('/api/v1/verify-document', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -447,14 +448,15 @@
                         <span>Pipeline Connection Note</span>
                         <span class="status-tag">Offline</span>
                     </div>
-                    <p>Backend endpoint not reachable yet. Start your Express server to receive live backend checks.</p>
+                    <p>Backend endpoint not reachable yet. Ensure Nginx or Express is running and listening for requests.</p>
                 `;
             }
         }
 
         async function loadAuditLogs() {
             try {
-                const res = await fetch('http://3.145.129.227:3005/api/v1/audit-logs');
+                // Relative URL path for portable server/proxy execution
+                const res = await fetch('/api/v1/audit-logs');
                 if (!res.ok) return;
                 const logs = await res.json();
                 const tbody = document.getElementById('audit-log-rows');
