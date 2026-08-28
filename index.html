@@ -40,6 +40,7 @@
             display: flex;
             flex-direction: column;
             padding: 24px;
+            flex-shrink: 0;
         }
 
         .brand {
@@ -69,6 +70,7 @@
             cursor: pointer;
             font-weight: 500;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .nav-item:hover, .nav-item.active {
@@ -136,6 +138,7 @@
             outline: none;
             margin-bottom: 16px;
             line-height: 1.5;
+            min-height: 180px;
         }
 
         textarea:focus { border-color: var(--accent-blue); }
@@ -164,6 +167,7 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
+            min-height: 200px;
         }
 
         .citation-item {
@@ -193,13 +197,17 @@
         .warning .status-tag { background: rgba(245, 158, 11, 0.15); color: var(--status-orange); }
         .citation-item p { font-size: 14px; line-height: 1.4; color: #E5E7EB; }
 
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
         .enterprise-table {
             width: 100%;
             border-collapse: collapse;
             background-color: var(--bg-sidebar);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
         }
 
         .enterprise-table th, .enterprise-table td {
@@ -216,6 +224,70 @@
         }
 
         .enterprise-table td { font-size: 15px; }
+
+        /* Mobile Breakpoint Optimization */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+                overflow-y: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 16px 20px;
+            }
+
+            .brand {
+                margin-bottom: 16px;
+                font-size: 20px;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 6px;
+                padding-bottom: 4px;
+            }
+
+            .nav-item {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
+
+            .nav-item.active {
+                border-left: none;
+                border-bottom: 3px solid var(--accent-blue);
+            }
+
+            .main-container {
+                padding: 20px 16px;
+                overflow-y: visible;
+            }
+
+            h1 {
+                font-size: 22px;
+                margin-bottom: 16px;
+            }
+
+            .workspace-split {
+                grid-template-columns: 1fr;
+                height: auto;
+                gap: 20px;
+            }
+
+            .input-panel, .output-panel {
+                height: auto;
+            }
+
+            .enterprise-table th, .enterprise-table td {
+                padding: 12px 14px;
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -272,30 +344,32 @@
 
         <div id="audit" class="view-section">
             <h1>Compliance Records</h1>
-            <table class="enterprise-table">
-                <thead>
-                    <tr>
-                        <th>Timestamp</th>
-                        <th>Document Target</th>
-                        <th>Assigned Auditor</th>
-                        <th>Verification Status</th>
-                    </tr>
-                </thead>
-                <tbody id="audit-log-rows">
-                    <tr>
-                        <td>2026-08-28 09:14</td>
-                        <td>Antitrust_Brief_Final.docx</td>
-                        <td>M_Carlson_Esq</td>
-                        <td style="color: var(--status-green)">✓ Cleared for Court</td>
-                    </tr>
-                    <tr>
-                        <td>2026-08-27 14:22</td>
-                        <td>Securities_Response_Draft3.txt</td>
-                        <td>J_Nylen_Partner</td>
-                        <td style="color: var(--status-red)">⚠ Intercepted (Fabricated Data)</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table class="enterprise-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Document Target</th>
+                            <th>Assigned Auditor</th>
+                            <th>Verification Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="audit-log-rows">
+                        <tr>
+                            <td>2026-08-28 09:14</td>
+                            <td>Antitrust_Brief_Final.docx</td>
+                            <td>M_Carlson_Esq</td>
+                            <td style="color: var(--status-green)">✓ Cleared for Court</td>
+                        </tr>
+                        <tr>
+                            <td>2026-08-27 14:22</td>
+                            <td>Securities_Response_Draft3.txt</td>
+                            <td>J_Nylen_Partner</td>
+                            <td style="color: var(--status-red)">⚠ Intercepted (Fabricated Data)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
