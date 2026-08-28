@@ -411,7 +411,7 @@
             feed.prepend(loadingCard);
 
             try {
-                const response = await fetch('http://YOUR_EC2_PUBLIC_IP:3005/api/v1/verify-document', {
+                const response = await fetch('http://3.145.129.227:3005/api/v1/verify-document', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
@@ -454,7 +454,7 @@
 
         async function loadAuditLogs() {
             try {
-                const res = await fetch('http://YOUR_EC2_PUBLIC_IP:3005/api/v1/audit-logs');
+                const res = await fetch('http://3.145.129.227:3005/api/v1/audit-logs');
                 if (!res.ok) return;
                 const logs = await res.json();
                 const tbody = document.getElementById('audit-log-rows');
